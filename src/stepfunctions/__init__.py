@@ -13,22 +13,17 @@
 from __future__ import absolute_import
 
 import logging
-import pkg_resources
 import sys
 
-__version__ = pkg_resources.require("stepfunctions")[0].version
 __useragent__ = "aws-step-functions-data-science-sdk-python"
 
 # disable logging.warning() from import packages
 logging.getLogger().setLevel(logging.ERROR)
 
 from stepfunctions import steps
-from stepfunctions import workflow
-from stepfunctions import template
-from stepfunctions.workflow.utils import CustomColorFormatter
 
 def set_stream_logger(level=logging.INFO):
-    logger = logging.getLogger('stepfunctions')
+    logger = logging.getLogger('asl')
     # setup logger config
     logger.setLevel(level)
     logger.propagate = False
@@ -37,13 +32,11 @@ def set_stream_logger(level=logging.INFO):
     # add stream handler to logger
     handler = logging.StreamHandler(sys.stdout)
     handler.setLevel(level)
-    handler.setFormatter(CustomColorFormatter())
     logger.addHandler(handler)
-    
 
 # http://docs.python.org/3.3/howto/logging.html#configuring-logging-for-a-library
 class NullHandler(logging.Handler):
     def emit(self, record):
         pass
 
-logging.getLogger('stepfunctions').addHandler(NullHandler())
+logging.getLogger('asl').addHandler(NullHandler())

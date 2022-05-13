@@ -94,9 +94,6 @@ ipython_config.py
 # celery beat schedule file
 celerybeat-schedule
 
-# SageMath parsed files
-*.sage.py
-
 # Environments
 .env
 .venv
@@ -126,3 +123,5 @@ dmypy.json
 
 .DS_Store
 .vscode/
+
+.idea

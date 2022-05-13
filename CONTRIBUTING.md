@@ -67,7 +67,7 @@ Before sending us a pull request, please ensure that:
 
 You can also run a single test with the following command: `tox -e py36 -- -s -vv <path_to_file><file_name>::<test_function_name>`
   * Note that the coverage test will fail if you only run a single test, so make sure to surround the command with `export IGNORE_COVERAGE=-` and `unset IGNORE_COVERAGE`
-  * Example: `export IGNORE_COVERAGE=- ; tox -e py36 -- -s -vv tests/unit/test_sagemaker_steps.py::test_training_step_creation_with_model ; unset IGNORE_COVERAGE`
+  * Example: `export IGNORE_COVERAGE=- ; tox -e py36 -- -s -vv tests/unit/test_steps.py::test_state_creation ; unset IGNORE_COVERAGE`
 
 #### Running Unit Tests and Debugging in PyCharm
 You can also run the unit tests with the following options:
@@ -85,36 +85,6 @@ If you haven't done so already, install tox and test dependencies:
 1. `pip install tox`
 1. `pip install .[test]`
 
-#### AWS Credentials
-Follow the instructions at [Set Up the AWS Command Line Interface (AWS CLI)](https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html).
-#### Create IAM Roles
-
-The tests use two IAM roles to give Step Functions and SageMaker permissions to access AWS resources in your account. Use the following commands in the root directory of this repository:
-
-```bash
-aws iam create-role \
-   --role-name StepFunctionsMLWorkflowExecutionFullAccess \
-   --assume-role-policy-document file://tests/integ/resources/StepFunctionsMLWorkflowExecutionFullAccess-TrustPolicy.json
-```
-
-```bash
-aws iam put-role-policy \
-   --role-name StepFunctionsMLWorkflowExecutionFullAccess \
-   --policy-name StepFunctionsMLWorkflowExecutionFullAccess \
-   --policy-document file://tests/integ/resources/StepFunctionsMLWorkflowExecutionFullAccess-Policy.json
-```
-
-```bash
-aws iam create-role \
-   --role-name SageMakerRole \
-   --assume-role-policy-document file://tests/integ/resources/SageMaker-TrustPolicy.json
-```
-
-```bash
-aws iam attach-role-policy \
-   --role-name SageMakerRole \
-   --policy-arn arn:aws:iam::aws:policy/AmazonSageMakerFullAccess
-```
 #### Execute the tests
 1. To run a test, specify the test file and method you want to run per the following command: `tox -e py36 -- -s -vv <path_to_file><file_name>::<test_function_name>`
    * Note that the coverage test will fail if you only run a single test, so make sure to surround the command with `export IGNORE_COVERAGE=-` and `unset IGNORE_COVERAGE`

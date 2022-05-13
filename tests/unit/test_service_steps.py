@@ -12,7 +12,6 @@
 # permissions and limitations under the License.
 from __future__ import absolute_import
 
-import boto3
 import pytest
 import re
 
@@ -36,7 +35,6 @@ from stepfunctions.steps.service import StepFunctionsStartExecutionStep
 from stepfunctions.steps.integration_resources import IntegrationPattern
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
 def test_sns_publish_step_creation():
     step = SnsPublishStep('Publish to SNS', parameters={
         'TopicArn': 'arn:aws:sns:us-east-1:123456789012:myTopic',
@@ -75,7 +73,7 @@ def test_sns_publish_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_sqs_send_message_step_creation():
     step = SqsSendMessageStep('Send to SQS', parameters={
         'QueueUrl': 'https://sqs.us-east-1.amazonaws.com/123456789012/myQueue',
@@ -113,7 +111,7 @@ def test_sqs_send_message_step_creation():
         'End': True
     }
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eventbridge_put_events_step_creation():
     step = EventBridgePutEventsStep('Send to EventBridge', parameters={
         "Entries": [
@@ -178,7 +176,7 @@ def test_eventbridge_put_events_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_dynamodb_get_item_step_creation():
     step = DynamoDBGetItemStep('Read Message From DynamoDB', parameters={
         'TableName': 'TransferDataRecords-DDBTable-3I41R5L5EAGT',
@@ -204,7 +202,7 @@ def test_dynamodb_get_item_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_dynamodb_put_item_step_creation():
     step = DynamoDBPutItemStep('Add Message From DynamoDB', parameters={
         'TableName': 'TransferDataRecords-DDBTable-3I41R5L5EAGT',
@@ -230,7 +228,7 @@ def test_dynamodb_put_item_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_dynamodb_delete_item_step_creation():
     step = DynamoDBDeleteItemStep('Delete Message From DynamoDB', parameters={
         'TableName': 'TransferDataRecords-DDBTable-3I41R5L5EAGT',
@@ -256,7 +254,7 @@ def test_dynamodb_delete_item_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_dynamodb_update_item_step_creation():
     step = DynamoDBUpdateItemStep('Update Message From DynamoDB', parameters={
         'TableName': 'TransferDataRecords-DDBTable-3I41R5L5EAGT',
@@ -290,7 +288,7 @@ def test_dynamodb_update_item_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_emr_create_cluster_step_creation():
     step = EmrCreateClusterStep('Create EMR cluster', parameters={
         'Name': 'MyWorkflowCluster',
@@ -460,7 +458,7 @@ def test_emr_create_cluster_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_emr_terminate_cluster_step_creation():
     step = EmrTerminateClusterStep('Terminate EMR cluster', parameters={
         'ClusterId': 'MyWorkflowClusterId'
@@ -489,7 +487,7 @@ def test_emr_terminate_cluster_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_emr_add_step_step_creation():
     step = EmrAddStepStep('Add step to EMR cluster', parameters={
         'ClusterId': 'MyWorkflowClusterId',
@@ -590,7 +588,7 @@ def test_emr_add_step_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_emr_cancel_step_step_creation():
     step = EmrCancelStepStep('Cancel step from EMR cluster', parameters={
         'ClusterId': 'MyWorkflowClusterId',
@@ -608,7 +606,7 @@ def test_emr_cancel_step_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_emr_set_cluster_termination_protection_step_creation():
     step = EmrSetClusterTerminationProtectionStep('Set termination protection for EMR cluster', parameters={
         'ClusterId': 'MyWorkflowClusterId',
@@ -626,7 +624,7 @@ def test_emr_set_cluster_termination_protection_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_emr_modify_instance_fleet_by_name_step_creation():
     step = EmrModifyInstanceFleetByNameStep('Modify Instance Fleet by name for EMR cluster', parameters={
         'ClusterId': 'MyWorkflowClusterId',
@@ -652,7 +650,7 @@ def test_emr_modify_instance_fleet_by_name_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_emr_modify_instance_group_by_name_step_creation():
     step = EmrModifyInstanceGroupByNameStep('Modify Instance Group by name for EMR cluster', parameters={
         'ClusterId': 'MyWorkflowClusterId',
@@ -676,7 +674,7 @@ def test_emr_modify_instance_group_by_name_step_creation():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_databrew_start_job_run_step_creation_default():
     step = GlueDataBrewStartJobRunStep('Start Glue DataBrew Job Run - default', parameters={
         "Name": "MyWorkflowJobRun"
@@ -692,7 +690,7 @@ def test_databrew_start_job_run_step_creation_default():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_databrew_start_job_run_step_creation_wait_for_completion():
     step = GlueDataBrewStartJobRunStep(
         'Start Glue DataBrew Job Run - WaitForCompletion', integration_pattern=IntegrationPattern.WaitForCompletion,
@@ -710,7 +708,7 @@ def test_databrew_start_job_run_step_creation_wait_for_completion():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_databrew_start_job_run_step_creation_call_and_continue():
     step = GlueDataBrewStartJobRunStep(
         'Start Glue DataBrew Job Run - CallAndContinue',
@@ -728,7 +726,7 @@ def test_databrew_start_job_run_step_creation_call_and_continue():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_databrew_start_job_run_step_creation_wait_for_task_token_raises_error():
     error_message = re.escape(f"Integration Pattern ({IntegrationPattern.WaitForTaskToken.name}) is not supported for this step - "
                               f"Please use one of the following: "
@@ -738,7 +736,7 @@ def test_databrew_start_job_run_step_creation_wait_for_task_token_raises_error()
                                     integration_pattern=IntegrationPattern.WaitForTaskToken)
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_cluster_step_creation_call_and_continue():
     step = EksCreateClusterStep("Create Eks cluster - CallAndContinue", integration_pattern=IntegrationPattern.CallAndContinue,
                                 parameters={
@@ -769,7 +767,7 @@ def test_eks_create_cluster_step_creation_call_and_continue():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_cluster_step_creation_default():
     step = EksCreateClusterStep("Create Eks cluster - default", parameters={
         'Name': 'MyCluster',
@@ -799,7 +797,7 @@ def test_eks_create_cluster_step_creation_default():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_cluster_step_creation_wait_for_completion():
     step = EksCreateClusterStep("Create Eks cluster - WaitForCompletion",
                                 integration_pattern=IntegrationPattern.WaitForCompletion,
@@ -831,7 +829,7 @@ def test_eks_create_cluster_step_creation_wait_for_completion():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_cluster_step_creation_wait_for_task_token_raises_error():
     error_message = re.escape(f"Integration Pattern ({IntegrationPattern.WaitForTaskToken.name}) is not supported for this step - "
                               f"Please use one of the following: "
@@ -841,7 +839,7 @@ def test_eks_create_cluster_step_creation_wait_for_task_token_raises_error():
                              integration_pattern=IntegrationPattern.WaitForTaskToken)
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_cluster_step_creation_call_and_continue():
     step = EksDeleteClusterStep("Delete Eks cluster - CallAndContinue",
                                 integration_pattern=IntegrationPattern.CallAndContinue,
@@ -859,7 +857,7 @@ def test_eks_delete_cluster_step_creation_call_and_continue():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_cluster_step_creation_default():
     step = EksDeleteClusterStep("Delete Eks cluster - default", parameters={
         'Name': 'MyCluster'
@@ -875,7 +873,7 @@ def test_eks_delete_cluster_step_creation_default():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_cluster_step_creation_wait_for_completion():
     step = EksDeleteClusterStep("Delete Eks cluster - WaitForCompletion",
                                 integration_pattern=IntegrationPattern.WaitForCompletion,
@@ -893,7 +891,7 @@ def test_eks_delete_cluster_step_creation_wait_for_completion():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_cluster_step_creation_wait_for_task_token_raises_error():
     error_message = re.escape(f"Integration Pattern ({IntegrationPattern.WaitForTaskToken.name}) is not supported for this step - "
                               f"Please use one of the following: "
@@ -903,7 +901,7 @@ def test_eks_delete_cluster_step_creation_wait_for_task_token_raises_error():
                              integration_pattern=IntegrationPattern.WaitForTaskToken)
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_fargate_profile_step_creation_call_and_continue():
     step = EksCreateFargateProfileStep("Create Fargate profile - CallAndContinue",
                                        integration_pattern=IntegrationPattern.CallAndContinue,
@@ -935,7 +933,7 @@ def test_eks_create_fargate_profile_step_creation_call_and_continue():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_fargate_profile_step_creation_default():
     step = EksCreateFargateProfileStep("Create Fargate profile - default", parameters={
         'ClusterName': 'MyCluster',
@@ -965,7 +963,7 @@ def test_eks_create_fargate_profile_step_creation_default():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_fargate_profile_step_creation_wait_for_completion():
     step = EksCreateFargateProfileStep("Create Fargate profile - WaitForCompletion",
                                        integration_pattern=IntegrationPattern.WaitForCompletion,
@@ -998,7 +996,7 @@ def test_eks_create_fargate_profile_step_creation_wait_for_completion():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_fargate_profile_step_creation_wait_for_task_token_raises_error():
     error_message = re.escape(f"Integration Pattern ({IntegrationPattern.WaitForTaskToken.name}) is not supported for this step - "
                               f"Please use one of the following: "
@@ -1008,7 +1006,7 @@ def test_eks_create_fargate_profile_step_creation_wait_for_task_token_raises_err
                                     integration_pattern=IntegrationPattern.WaitForTaskToken)
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_fargate_profile_step_creation_call_and_continue():
     step = EksDeleteFargateProfileStep("Delete Fargate profile - CallAndContinue",
                                        integration_pattern=IntegrationPattern.CallAndContinue,
@@ -1028,7 +1026,7 @@ def test_eks_delete_fargate_profile_step_creation_call_and_continue():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_fargate_profile_step_creation_default():
     step = EksDeleteFargateProfileStep("Delete Fargate profile - default", parameters={
         'ClusterName': 'MyCluster',
@@ -1046,7 +1044,7 @@ def test_eks_delete_fargate_profile_step_creation_default():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_fargate_profile_step_creation_wait_for_completion():
     step = EksDeleteFargateProfileStep("Delete Fargate profile - WaitForCompletion",
                                        integration_pattern=IntegrationPattern.WaitForCompletion,
@@ -1066,7 +1064,7 @@ def test_eks_delete_fargate_profile_step_creation_wait_for_completion():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_fargate_profile_step_creation_wait_for_task_token_raises_error():
     error_message = re.escape(f"Integration Pattern ({IntegrationPattern.WaitForTaskToken.name}) is not supported for this step - "
                               f"Please use one of the following: "
@@ -1076,7 +1074,7 @@ def test_eks_delete_fargate_profile_step_creation_wait_for_task_token_raises_err
                                     integration_pattern=IntegrationPattern.WaitForTaskToken)
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_nodegroup_step_creation_call_and_continue():
     step = EksCreateNodegroupStep("Create Nodegroup - CallAndContinue",
                                   integration_pattern=IntegrationPattern.CallAndContinue,
@@ -1106,7 +1104,7 @@ def test_eks_create_nodegroup_step_creation_call_and_continue():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_nodegroup_step_creation_wait_for_completion():
     step = EksCreateNodegroupStep("Create Nodegroup - WaitForCompletion",
                                   integration_pattern=IntegrationPattern.WaitForCompletion,
@@ -1136,7 +1134,7 @@ def test_eks_create_nodegroup_step_creation_wait_for_completion():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_nodegroup_step_creation_default():
     step = EksCreateNodegroupStep("Create Nodegroup - default", parameters={
         'ClusterName': 'MyCluster',
@@ -1164,7 +1162,7 @@ def test_eks_create_nodegroup_step_creation_default():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_create_nodegroup_step_creation_wait_for_task_token_raises_error():
     error_message = re.escape(f"Integration Pattern ({IntegrationPattern.WaitForTaskToken.name}) is not supported for this step - "
                               f"Please use one of the following: "
@@ -1174,7 +1172,7 @@ def test_eks_create_nodegroup_step_creation_wait_for_task_token_raises_error():
                                integration_pattern=IntegrationPattern.WaitForTaskToken)
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_nodegroup_step_creation_call_and_continue():
     step = EksDeleteNodegroupStep("Delete Nodegroup - CallAndContinue",
                                   integration_pattern=IntegrationPattern.CallAndContinue,
@@ -1194,7 +1192,7 @@ def test_eks_delete_nodegroup_step_creation_call_and_continue():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_nodegroup_step_creation_default():
     step = EksDeleteNodegroupStep("Delete Nodegroup - default", parameters={
         'ClusterName': 'MyCluster',
@@ -1212,7 +1210,7 @@ def test_eks_delete_nodegroup_step_creation_default():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_nodegroup_step_creation_wait_for_completion():
     step = EksDeleteNodegroupStep("Delete Nodegroup - WaitForCompletion",
                                   integration_pattern=IntegrationPattern.WaitForCompletion,
@@ -1232,7 +1230,7 @@ def test_eks_delete_nodegroup_step_creation_wait_for_completion():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_delete_nodegroup_step_creation_wait_for_task_token_raises_error():
     error_message = re.escape(f"Integration Pattern ({IntegrationPattern.WaitForTaskToken.name}) is not supported for this step - "
                               f"Please use one of the following: "
@@ -1242,7 +1240,7 @@ def test_eks_delete_nodegroup_step_creation_wait_for_task_token_raises_error():
                                integration_pattern=IntegrationPattern.WaitForTaskToken)
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_run_job_step_creation_call_and_continue():
     step = EksRunJobStep("Run Job - CallAndContinue", integration_pattern=IntegrationPattern.CallAndContinue, parameters={
         'ClusterName': 'MyCluster',
@@ -1313,7 +1311,7 @@ def test_eks_run_job_step_creation_call_and_continue():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_run_job_step_creation_default():
     step = EksRunJobStep("Run Job - default", parameters={
         'ClusterName': 'MyCluster',
@@ -1390,7 +1388,7 @@ def test_eks_run_job_step_creation_default():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_run_job_step_creation_wait_for_completion():
     step = EksRunJobStep("Run Job - WaitForCompletion", integration_pattern=IntegrationPattern.WaitForCompletion,
                          parameters={
@@ -1468,7 +1466,7 @@ def test_eks_run_job_step_creation_wait_for_completion():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_run_job_step_creation_wait_for_task_token_raises_error():
     error_message = re.escape(f"Integration Pattern ({IntegrationPattern.WaitForTaskToken.name}) is not supported for this step - "
                               f"Please use one of the following: "
@@ -1477,7 +1475,7 @@ def test_eks_run_job_step_creation_wait_for_task_token_raises_error():
         EksRunJobStep("Run Job - WaitForTaskToken", integration_pattern=IntegrationPattern.WaitForTaskToken)
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_call_step_creation_default():
     step = EksCallStep("Call - default", parameters={
         'ClusterName': 'MyCluster',
@@ -1511,7 +1509,7 @@ def test_eks_call_step_creation_default():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_call_step_creation_call_and_continue():
     step = EksCallStep("Call - default", integration_pattern=IntegrationPattern.CallAndContinue, parameters={
         'ClusterName': 'MyCluster',
@@ -1549,7 +1547,7 @@ def test_eks_call_step_creation_call_and_continue():
     IntegrationPattern.WaitForTaskToken,
     IntegrationPattern.WaitForCompletion
 ])
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_eks_call_step_creation_with_unsupported_integration_pattern_raises_error(integration_pattern):
     error_message = re.escape(f"Integration Pattern ({integration_pattern.name}) is not supported for this step - "
                               f"Please use one of the following: "
@@ -1558,7 +1556,7 @@ def test_eks_call_step_creation_with_unsupported_integration_pattern_raises_erro
         EksCallStep("Call with unsupported integration pattern", integration_pattern=integration_pattern)
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_step_functions_start_execution_step_creation_default():
     step = StepFunctionsStartExecutionStep(
         "SFN Start Execution", parameters={
@@ -1577,7 +1575,7 @@ def test_step_functions_start_execution_step_creation_default():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_step_functions_start_execution_step_creation_call_and_continue():
     step = StepFunctionsStartExecutionStep(
         "SFN Start Execution", integration_pattern=IntegrationPattern.CallAndContinue, parameters={
@@ -1596,7 +1594,7 @@ def test_step_functions_start_execution_step_creation_call_and_continue():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_step_functions_start_execution_step_creation_wait_for_completion():
     step = StepFunctionsStartExecutionStep(
         "SFN Start Execution - Sync", integration_pattern=IntegrationPattern.WaitForCompletion, parameters={
@@ -1615,7 +1613,7 @@ def test_step_functions_start_execution_step_creation_wait_for_completion():
     }
 
 
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_step_functions_start_execution_step_creation_wait_for_task_token():
     step = StepFunctionsStartExecutionStep(
         "SFN Start Execution - Wait for Callback", integration_pattern=IntegrationPattern.WaitForTaskToken,
@@ -1646,7 +1644,7 @@ def test_step_functions_start_execution_step_creation_wait_for_task_token():
     "ServiceIntegrationTypeStr",
     0
 ])
-@patch.object(boto3.session.Session, 'region_name', 'us-east-1')
+
 def test_step_functions_start_execution_step_creation_invalid_integration_pattern_raises_type_error(integration_pattern):
     with pytest.raises(TypeError):
         StepFunctionsStartExecutionStep("SFN Start Execution - invalid ServiceType", integration_pattern=integration_pattern)

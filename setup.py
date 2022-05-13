@@ -30,9 +30,6 @@ def read_version():
 
 # Declare minimal set for installation
 required_packages = [
-    "sagemaker>=2.1.0",
-    "boto3>=1.14.38",
-    "pyyaml"
 ]
 
 # enum is introduced in Python 3.4. Installing enum back port
@@ -40,17 +37,17 @@ if sys.version_info < (3, 4):
     required_packages.append("enum34>=1.1.6")
 
 setup(
-    name="stepfunctions",
+    name="stepfunctions-asl",
     version=read_version(),
-    description="Open source library for developing data science workflows on AWS Step Functions.",
+    description="Stripped version of Step Functions Data Science SDK. Contains only code for ASL state machines.",
     packages=find_packages("src"),
     package_dir={"": "src"},
     py_modules=[os.path.splitext(os.path.basename(path))[0] for path in glob("src/*.py")],
-    long_description=read("README.rst"),
+    long_description=read("README.md"),
     author="Amazon Web Services",
     url="https://github.com/aws/aws-step-functions-data-science-sdk-python",
     license="Apache License 2.0",
-    keywords="ML Amazon AWS AI Tensorflow MXNet",
+    keywords="ML Amazon AWS ASL",
     classifiers=[
         "Intended Audience :: Developers",
         "Natural Language :: English",
@@ -64,7 +61,6 @@ setup(
             "tox>=3.13.1",
             "pytest>=4.4.1",
             "stopit==1.1.2",
-            "tensorflow>=1.3.0",
             "mock>=2.0.0",
             "contextlib2==0.5.5",
             "IPython",
