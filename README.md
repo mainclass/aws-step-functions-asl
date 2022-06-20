@@ -1,3 +1,7 @@
+```
+pip install stepfunctions-asl
+```
+
 Fork of the [aws > aws-step-functions-data-science-sdk-python](https://github.com/aws/aws-step-functions-data-science-sdk-python).
 
 Stripped version of the original repo - AWS Step Functions Data Science SDK. Contains only code for building 
